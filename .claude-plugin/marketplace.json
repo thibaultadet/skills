@@ -13,6 +13,7 @@
       "category": "engineering",
       "strict": false,
       "skills": [
+        "./skills/engineering/architect",
         "./skills/engineering/catch-up",
         "./skills/engineering/push-pr",
         "./skills/engineering/review-changes",
