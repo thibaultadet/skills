@@ -1,0 +1,26 @@
+{
+  "name": "thibaultadet",
+  "owner": {
+    "name": "Thibault Adet",
+    "url": "https://github.com/thibaultadet"
+  },
+  "description": "Thibault Adet's agent skills, as installable Claude Code plugins.",
+  "plugins": [
+    {
+      "name": "thibaultadet-skills",
+      "source": "./",
+      "description": "Engineering and explanation skills: branch catch-up, PR workflows, change review, diagrams, interactive and STE explanations.",
+      "category": "engineering",
+      "strict": false,
+      "skills": [
+        "./skills/engineering/catch-up",
+        "./skills/engineering/push-pr",
+        "./skills/engineering/review-changes",
+        "./skills/engineering/take-over-pr",
+        "./skills/explain/diagram",
+        "./skills/explain/sim",
+        "./skills/explain/ste"
+      ]
+    }
+  ]
+}
