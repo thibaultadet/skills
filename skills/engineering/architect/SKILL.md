@@ -38,7 +38,7 @@ const run = (role, prompt, { model, effort, ...opts } = {}) => {
 
 1. `gh issue view <n> --comments`. The issue is the spec.
 2. Extract the **done criteria**: acceptance criteria, user stories, explicit out-of-scope. If they're too vague to judge a review against, ask the user now — not after three rounds.
-3. Create a branch `issue-<n>-<slug>` from main. Note the fixed point (`main`) for reviews.
+3. Create a branch `issue/<n>` from main. Note the fixed point (`main`) for reviews.
 4. Make the **evidence dir** `$(git rev-parse --absolute-git-dir)/architect-<n>/` — outside the worktree, readable by every agent.
 5. If the code area is unknown, one `haiku` explorer writes paths + short notes to `notes.md` there. Prompts then point to that file and to the issue, never paste them.
 
