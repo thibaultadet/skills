@@ -8,6 +8,13 @@ Agent skills I use with Claude Code.
 npx skills add thibaultadet/skills
 ```
 
+Or as Claude Code plugins:
+
+```sh
+claude plugin marketplace add thibaultadet/skills
+claude plugin install thibaultadet-skills@thibaultadet
+```
+
 ## Skills
 
 ### Engineering
