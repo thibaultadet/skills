@@ -1,6 +1,11 @@
 ---
 name: sim
 description: Builds a self-contained interactive HTML page that teaches a technical subject step by step — one step visible at a time, a Next button, and scenarios where the reader makes choices and sees the consequences. Use when the user asks for an interactive explanation, "pas à pas", "page HTML interactive", or when another skill (e.g. catch-up) picks the interactive format for branching business rules.
+metadata:
+  credits:
+    article: "Quatre façons d'expliquer un harnais"
+    author: Taha K
+    url: "https://tahak.me/posts/quatre-facons-expliquer-un-harnais/"
 ---
 
 # Explain — interactive HTML

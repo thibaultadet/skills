@@ -1,6 +1,11 @@
 ---
 name: ste
 description: Explains a technical subject in ~80% ASD-STE100 Simplified Technical English style (short sentences, active voice, one idea per sentence, no intro or outro), written in the user's language. Use when the user asks for a plain, dense, no-fluff explanation, says "explique simplement", "en STE", or when another skill (e.g. catch-up) picks the text format.
+metadata:
+  credits:
+    article: "Quatre façons d'expliquer un harnais"
+    author: Taha K
+    url: "https://tahak.me/posts/quatre-facons-expliquer-un-harnais/"
 ---
 
 # Explain — STE text

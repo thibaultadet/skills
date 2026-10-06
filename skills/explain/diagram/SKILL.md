@@ -1,6 +1,11 @@
 ---
 name: diagram
 description: Explains a technical subject as a single SVG diagram (5 to 7 blocks max, arrows for flows) instead of text, then opens it. Use when the user asks for "un schéma", a diagram, a visual of a flow/architecture, or when another skill (e.g. catch-up) picks the diagram format for a multi-component flow.
+metadata:
+  credits:
+    article: "Quatre façons d'expliquer un harnais"
+    author: Taha K
+    url: "https://tahak.me/posts/quatre-facons-expliquer-un-harnais/"
 ---
 
 # Explain — SVG diagram
