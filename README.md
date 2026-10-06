@@ -27,6 +27,8 @@ claude plugin install thibaultadet-skills@thibaultadet
 
 ### Explain
 
+From Taha K's article [Quatre façons d'expliquer un harnais](https://tahak.me/posts/quatre-facons-expliquer-un-harnais/).
+
 - **diagram** — explain a technical subject as a single SVG diagram.
 - **sim** — interactive step-by-step HTML page with scenarios.
 - **ste** — dense explanation in Simplified Technical English style.
