@@ -12,6 +12,7 @@ npx skills add thibaultadet/skills
 
 ### Engineering
 
+- **catch-up** — interactive zone-by-zone walkthrough of an agent-built branch, with attention points.
 - **push-pr** — push the current branch and open a PR with a generated description.
 - **review-changes** — review staged and unstaged changes before committing.
 - **take-over-pr** — rebase an agent-opened PR on main, resolve conflicts, quick review.
