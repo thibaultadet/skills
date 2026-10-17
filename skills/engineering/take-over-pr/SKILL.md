@@ -12,7 +12,7 @@ The argument is a PR number. If there is none, use the PR of the current branch 
 
 - Require a clean working tree. If it is dirty, stop and ask.
 - `gh pr checkout <n>`, then `git fetch origin main`.
-- Note the PR state (`gh pr view <n> --json state,mergeable,statusCheckRollup`). If the PR is merged or closed, stop and report.
+- Note the PR state (`gh pr view <n> --json state,isDraft,mergeable,statusCheckRollup`). If the PR is merged or closed, stop and report. A draft PR skips CI: its checks read `SKIPPED`, not green.
 
 Done when HEAD is the PR head branch and `origin/main` is fresh.
 
@@ -31,7 +31,7 @@ Done when the branch contains `origin/main` and the checks are green. If a check
 
 ## 3. Gather the two review inputs
 
-**Spec**: the issues the PR implements. Look in the `## Issues` section of the PR body, in `closingIssuesReferences`, and in the branch name (`issue/<n>`). Read each issue with `gh issue view <n> --comments`, and follow its parent PRD when it names one. An `## Interface` section in an issue is a contract (see `docs/coding-standards.md`).
+**Spec**: the issues the PR implements. Look in the `## Issues` section of the PR body, in `closingIssuesReferences`, and in the branch name (`issue/<n>`). Read each issue with `gh issue view <n> --json title,state,body,comments` (plain `--comments` can print nothing), and follow its parent PRD when it names one. An `## Interface` section in an issue is a contract (see `docs/coding-standards.md`).
 
 **Pre-review**: the latest PR comment whose body starts with `<!-- sandcastle-pr-check -->`. Its numbered points are the attention points. Its `Manual:` line lists checks only a human can run.
 
@@ -52,6 +52,7 @@ Done when every criterion and every pre-review point has a verdict backed by cod
 Keep it terse, in the terminal:
 
 1. Rebase: `up to date` · `rebased locally, N conflicts resolved (files), push pending` · `blocked (why)`.
+   CI: `green` · `red (checks)` · `skipped: draft → gh pr ready <n>`.
 2. Verdict: **ready to merge** · **needs fixes** · **blocked**.
 3. Table: spec items, then pre-review points, with their verdicts.
 4. Manual checks still open, copied from the pre-review's `Manual:` line.
