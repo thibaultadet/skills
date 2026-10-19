@@ -29,13 +29,21 @@ Done when HEAD is the PR head branch and `origin/main` is fresh.
 
 Done when the branch contains `origin/main` and the checks are green. If a check stays red after one honest fix attempt, stop and report it.
 
-## 3. Gather the two review inputs
+## 3. Gather the review inputs
 
 **Spec**: the issues the PR implements. Look in the `## Issues` section of the PR body, in `closingIssuesReferences`, and in the branch name (`issue/<n>`). Read each issue with `gh issue view <n> --json title,state,body,comments` (plain `--comments` can print nothing), and follow its parent PRD when it names one. An `## Interface` section in an issue is a contract (see `docs/coding-standards.md`).
 
+**Siblings**: the other issues of that PRD own the work this PR leaves out. Find the parent with `gh api 'repos/{owner}/{repo}/issues/<n>/parent' --jq .number` (404: none) or the PRD the issue names, then list its sub-issues:
+```sh
+gh api 'repos/{owner}/{repo}/issues/<prd>/sub_issues' --jq '.[] | "#\(.number) [\(.state)] \(.title)"'
+```
+Read the body of every sibling whose title touches what the PR does.
+
+**Mockup**: the design the issue or PRD names (a mockup file, a design artifact link, a board the repo's design index maps to the issue). The repo's verification skill says how to render it next to the app.
+
 **Pre-review**: the latest PR comment whose body starts with `<!-- sandcastle-pr-check -->`. Its numbered points are the attention points. Its `Manual:` line lists checks only a human can run.
 
-If either input is missing, say so and review with the one you have.
+If the spec or the pre-review is missing, say so and review with the one you have.
 
 ## 4. Quick review
 
@@ -43,9 +51,12 @@ Read the diff (`git diff origin/main...HEAD`) with both inputs next to it. Give 
 
 - **Each acceptance criterion / interface item**: ✅ implemented (cite `file:line`, plus the spec covering it) · ⚠️ partial · ❌ missing.
 - **Each pre-review point**, checked against the code as it is now (after the rebase): 🔴 still true · ✅ fixed · ⚪ false positive (say why).
+- **The mockup**, when the spec names one: each screen the PR changes, side by side with its mockup → ✅ matches · ⚠️ differences (list each one).
 - Anything the rebase changed in behaviour, even if both sides were fine alone.
 
-Done when every criterion and every pre-review point has a verdict backed by code you read, not by the pre-review's own wording.
+Every ⚠️ and ❌ names its owner: **this PR**, or the sibling issue that covers it (cite `#n`). Propose a new issue only for a gap no sibling covers.
+
+Done when every criterion, every pre-review point and every mockup screen has a verdict backed by code or screenshots you saw, not by the pre-review's own wording, and every gap has an owner.
 
 ## 5. Report
 
@@ -54,7 +65,7 @@ Keep it terse, in the terminal:
 1. Rebase: `up to date` · `rebased locally, N conflicts resolved (files), push pending` · `blocked (why)`.
    CI: `green` · `red (checks)` · `skipped: draft → gh pr ready <n>`.
 2. Verdict: **ready to merge** · **needs fixes** · **blocked**.
-3. Table: spec items, then pre-review points, with their verdicts.
+3. Table: spec items, mockup screens, then pre-review points, with their verdicts and owners.
 4. Manual checks still open, copied from the pre-review's `Manual:` line.
 
 The terminal is the only output. Leave fixes, the push, PR comments and the merge to the user.
