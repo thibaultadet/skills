@@ -51,8 +51,10 @@ Done when the history matches the target the user approved and the tree is ident
 
 ## 4. Write the PR
 
-- **Title**: under 70 chars, imperative, in English.
-- **Body**: per the `pr` skill (Summary, Evidence, Merge Danger), in English. Evidence is what actually ran in this session or can run now (tests, command output); with none, the Evidence section says so. Add `Closes #<n>` when the branch or commits name an issue. With a pre-review, add a `## Pre-review` section: every point, numbered as in the comment, with its step-2 verdict. End with:
+The **linked issue** is the one the branch or commits name (e.g. `issue/<n>`, `#<n>`).
+
+- **Title**: `#<n> ` first when there is a linked issue, then under 70 chars, imperative, in English.
+- **Body**: per the `pr` skill (Summary, Evidence, Merge Danger), in English. Evidence is what actually ran in this session or can run now (tests, command output); with none, the Evidence section says so. Add `Closes #<n>` for the linked issue. With a pre-review, add a `## Pre-review` section: every point, numbered as in the comment, with its step-2 verdict. End with:
   ```
   🤖 Generated with [Claude Code](https://claude.com/claude-code)
   ```

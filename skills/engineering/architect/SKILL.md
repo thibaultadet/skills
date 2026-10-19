@@ -77,7 +77,7 @@ Open the PR only when **all** hold, otherwise skip to Report:
 - every done criterion: pass, with evidence.
 
 1. Write the body per the `pr` skill, in the session (you hold the context): Summary from the diff, Evidence from `before.md` / `after-*.md`, Merge Danger. Add `Closes #<n>`.
-2. `git push -u origin HEAD`, then `gh pr create --title "<issue title>" --body-file <evidence dir>/pr.md`.
+2. `git push -u origin HEAD`, then `gh pr create --title "#<n> <issue title>" --body-file <evidence dir>/pr.md`.
 
 ## 5. Report — in the session
 
