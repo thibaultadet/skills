@@ -21,7 +21,7 @@ claude plugin install thibaultadet-skills@thibaultadet
 
 - **architect** — from a GitHub issue: implement → review → fix loop, verify, then PR — subagents sized per role (model/effort) to save tokens. Adapted from [Adrien Lupo's `ventilate`](https://github.com/adrienlupo/Claude-code-config/tree/main/skills/ventilate).
 - **catch-up** — interactive zone-by-zone walkthrough of an agent-built branch, with attention points.
-- **push-pr** — push the current branch and open a PR with a generated description.
+- **push-pr** — clean the commits, check the pre-review points, push the branch and open (or update) a PR with a body from the `pr` skill.
 - **review-changes** — review staged and unstaged changes before committing.
 - **take-over-pr** — rebase an agent-opened PR on main, resolve conflicts, quick review.
 
