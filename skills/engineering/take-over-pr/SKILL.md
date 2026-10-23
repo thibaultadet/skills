@@ -51,7 +51,7 @@ Read the diff (`git diff origin/main...HEAD`) with both inputs next to it. Give 
 
 - **Each acceptance criterion / interface item**: ✅ implemented (cite `file:line`, plus the spec covering it) · ⚠️ partial · ❌ missing.
 - **Each pre-review point**, checked against the code as it is now (after the rebase): 🔴 still true · ✅ fixed · ⚪ false positive (say why).
-- **The mockup**, when the spec names one: each screen the PR changes, side by side with its mockup → ✅ matches · ⚠️ differences (list each one).
+- **The mockup**, when the spec names one: each screen the PR changes, rendered by you side by side with its mockup → ✅ matches · ⚠️ differences (list each one). A pre-review that sends the mockup to `Manual:` hands that render to you.
 - Anything the rebase changed in behaviour, even if both sides were fine alone.
 
 Every ⚠️ and ❌ names its owner: **this PR**, or the sibling issue that covers it (cite `#n`). Propose a new issue only for a gap no sibling covers.
@@ -64,7 +64,7 @@ Keep it terse, in the terminal:
 
 1. Rebase: `up to date` · `rebased locally, N conflicts resolved (files), push pending` · `blocked (why)`.
    CI: `green` · `red (checks)` · `skipped: draft → gh pr ready <n>`.
-2. Verdict: **ready to merge** · **needs fixes** · **blocked**.
+2. Verdict: **ready to merge** · **needs fixes** · **blocked**. Any ⚠️ or ❌ owned by this PR, mockup differences included, makes it **needs fixes**.
 3. Table: spec items, mockup screens, then pre-review points, with their verdicts and owners.
 4. Manual checks still open, copied from the pre-review's `Manual:` line.
 
