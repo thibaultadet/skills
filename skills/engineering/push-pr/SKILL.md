@@ -34,6 +34,12 @@ Done when every point has a verdict backed by code you read, and the user has de
 
 Target: each commit is one logical change, and its message follows the repo's convention (read it from `git log main --oneline -20`, e.g. `type(scope): summary`). WIP, `fixup`, typo and "address review" commits fold into the commit they fix.
 
+First, the **comment pass**: commits made after the last review reach the PR unchecked. List every comment the branch adds:
+```sh
+git diff main...HEAD -U0 -- . ':!*.md' | grep -E '^(\+\+\+ |\+\s*(#|//|/\*|\{/\*))'
+```
+Hold each one against the repo's comment rule (beny: `docs/coding-standards.md` `## Comments`). One that restates the code, a commit message or a ticket, or heads a module, class or method, goes: delete it, or rename the code it explains. Fold each removal into the commit that added the comment (`git log -S '<text>'`), within the history rewrite below.
+
 - History already meets the target → skip to step 4.
 - Otherwise propose the target history (one line per commit: message + files) and wait for the user's go. If the branch is already pushed, say the push will need `--force-with-lease`.
 - Rewrite it:
