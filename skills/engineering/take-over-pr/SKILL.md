@@ -1,6 +1,6 @@
 ---
 name: take-over-pr
-description: Take over a PR, typically one a sandcastle run opened. Rebase it on main, resolve conflicts, then do a quick review against the spec and the pre-review points.
+description: Take over a PR, typically one a sandcastle run opened. Rebase it on main (or sync its stack when stacked), resolve conflicts, then do a quick review against the spec and the pre-review points.
 disable-model-invocation: true
 ---
 
@@ -12,11 +12,13 @@ The argument is a PR number. If there is none, use the PR of the current branch 
 
 - Require a clean working tree. If it is dirty, stop and ask.
 - `gh pr checkout <n>`, then `git fetch origin main`.
-- Note the PR state (`gh pr view <n> --json state,isDraft,mergeable,statusCheckRollup`). If the PR is merged or closed, stop and report. A draft PR skips CI: its checks read `SKIPPED`, not green.
+- Note the PR state and its base (`gh pr view <n> --json state,isDraft,mergeable,baseRefName,statusCheckRollup`). If the PR is merged or closed, stop and report. A draft PR skips CI: its checks read `SKIPPED`, not green.
 
 Done when HEAD is the PR head branch and `origin/main` is fresh.
 
 ## 2. Rebase on main if behind
+
+A PR whose `baseRefName` is not `main` is **stacked**: its parent is another PR's branch. Never `git rebase origin/main` it, that replays the parent's commits and detaches the branch from its stack. Invoke the `gh-stack` skill, `gh stack checkout` the PR, then `gh stack sync` and `gh stack rebase`. If `gh stack view` says the branch is not part of a stack, the stack was never initialised: say so and ask before rebuilding it by hand. Then continue at the checks below.
 
 - `git merge-base --is-ancestor origin/main HEAD` succeeds → already up to date. Skip to step 3.
 - Otherwise run `git rebase origin/main`. On conflict, invoke the `resolving-merge-conflicts` skill. The PR's intent comes from its body and linked issue. `main`'s intent comes from the commits that landed since the branch diverged.
