@@ -45,15 +45,16 @@ Hold each one against the repo's comment rule (beny: `docs/coding-standards.md` 
 - Rewrite it:
   ```sh
   before=$(git rev-parse HEAD)
-  git reset --soft $(git merge-base main HEAD)
+  base=$(git merge-base main HEAD)
+  git reset --soft $base
   git restore --staged .
   # per target commit, in order:
   git add <files> && git commit -m "<message>"
   ```
   A file shared by two target commits forces them into one; merge them rather than split the file.
-- Verify: `git diff $before HEAD` is empty. Not empty → `git reset --hard $before` and report.
+- Verify: `git diff $before HEAD` is empty, and `git rev-list --count $base..HEAD` equals the number of target commits. The count guards the parent: a tree committed on a newer `main` matches `$before` yet reverts every merge since `$base`. Either check fails → `git reset --hard $before` and report.
 
-Done when the history matches the target the user approved and the tree is identical to `$before`.
+Done when the history matches the target the user approved, sits on `$base`, and the tree is identical to `$before`.
 
 ## 4. Write the PR
 
